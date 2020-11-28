@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div th:fragment="nav">
+    <ul class="nav nav-pills">
+        <li role="presentation" th:class="${activeLink=='foo' ? 'active' : ''}"><a th:href="@{/foos}">Foo</a></li>
+        <li role="presentation" th:class="${activeLink=='customer' ? 'active' : ''}"><a th:href="@{/customers}">Customer</a></li>
+        <li role="presentation" th:class="${activeLink=='employee' ? 'active' : ''}"><a th:href="@{/employees}">Employee</a></li>
+    </ul>
+</div>
+
+</body>
+</html>

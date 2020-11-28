@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>Customer</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
+    <!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        #container {
+            width: 1000px;
+            margin: 10px auto;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+    <div th:replace="common/nav::nav(activeLink='customer')"></div>
+    <hr>
+    <div>
+        <form th:action="@{/customer}" method="post">
+            <input type="hidden" name="_method" value="put" th:if="${customer != null}">
+            <input type="hidden" name="id" th:value="${customer != null ? customer.id : ''}">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" name="name" th:value="${customer != null ? customer.name : ''}" class="form-control" id="name" placeholder="Name" maxlength=10 required>
+            </div>
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" name="age" th:value="${customer != null ? customer.age : ''}" class="form-control" id="age" placeholder="Age" required maxlength=3 min=1 max=200>
+            </div>
+            <div class="form-group">
+                <label class="radio-inline">
+                    <input type="radio" name="gender" id="inlineRadio1" value="0" th:checked="${customer != null && customer.gender == 0}"> 女
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="gender" id="inlineRadio2" value="1" th:checked="${customer != null && customer.gender == 1}"> 男
+                </label>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="tel" name="phone" th:value="${customer != null ? customer.phone : ''}" class="form-control" id="phone" pattern="^1([358][0-9]|4[579]|66|7[0135678]|9[89])[0-9]{8}$" placeholder="Phone"  maxlength=11 required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" name="email" th:value="${customer != null ? customer.email : ''}" class="form-control" id="email" placeholder="Email" required maxlength=100>
+            </div>
+
+            <button type="submit" class="btn btn-primary">提交</button>
+        </form>
+    </div>
+</div>
+
+
+<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+<!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
